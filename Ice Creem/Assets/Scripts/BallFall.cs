@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BallFall : MonoBehaviour
 {
     private GameObject Excellent;
     private bool ex1 = false, ex2 = false, excellent = false;
     private bool DontIceCream = true;
+    private Collider2D coll;
     private Rigidbody2D rb;
 
     private void Start()
     {
+        coll = GetComponent<Collider2D>();
         Excellent = GameObject.Find("Excellent");
         rb = GetComponent<Rigidbody2D>();
     }
@@ -33,8 +36,7 @@ public class BallFall : MonoBehaviour
             excellent = true;
             DontIceCream = false;
         }
-
-
+                
     }
 
     private void Update()
@@ -42,9 +44,9 @@ public class BallFall : MonoBehaviour
         if (excellent)
         {
             rb.velocity = Vector2.zero;
+            coll.isTrigger = false;
             Excellent.transform.position = gameObject.transform.position;
-
-
         }
     }
 }
+

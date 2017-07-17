@@ -32,7 +32,6 @@ public class SpawnBalls : MonoBehaviour {
         {
             rb.velocity = Vel * -speed;
         }
-
     }
 
     private void Update()
