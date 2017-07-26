@@ -50,9 +50,12 @@ public class BallFall : MonoBehaviour
             rb.velocity = Vector2.zero;
             coll.sharedMaterial = ExMaterial;
 
-            //gameObject.AddComponent<FixedJoint2D>();
-            //FixedJoint2D fixedJoint = GetComponent<FixedJoint2D>();
-            //fixedJoint.connectedBody = LastBall.GetComponent<Rigidbody2D>();
+            gameObject.AddComponent<FrictionJoint2D>();
+            FrictionJoint2D frictionJoint = GetComponent<FrictionJoint2D>();
+            frictionJoint.connectedBody = LastBall.GetComponent<Rigidbody2D>();
+            frictionJoint.maxTorque = 200;
+            frictionJoint.breakForce = 3;
+            frictionJoint.enableCollision = true;
 
             Excellent.transform.position = gameObject.transform.position - new Vector3(0.0f, 0.0538f, 0.0f);
 
