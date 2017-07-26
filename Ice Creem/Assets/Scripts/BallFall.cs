@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class BallFall : MonoBehaviour
 {
+    public PhysicsMaterial2D ExMaterial;
+    public GameObject LastBall;
+
     private GameObject Excellent;
     private bool ex1 = false, ex2 = false, excellent = false;
     private bool DontIceCream = true;
@@ -13,6 +16,8 @@ public class BallFall : MonoBehaviour
 
     private void Start()
     {
+        LastBall = GameObject.Find("Start");      
+
         coll = GetComponent<Collider2D>();
         Excellent = GameObject.Find("Excellent");
         rb = GetComponent<Rigidbody2D>();
@@ -34,18 +39,24 @@ public class BallFall : MonoBehaviour
         if (DontIceCream && ex2 && ex1)
         {
             excellent = true;
-            DontIceCream = false;
         }
                 
     }
 
     private void Update()
     {
-        if (excellent)
+        if (excellent && DontIceCream)
         {
             rb.velocity = Vector2.zero;
-            coll.isTrigger = false;
-            Excellent.transform.position = gameObject.transform.position;
+            coll.sharedMaterial = ExMaterial;
+
+            //gameObject.AddComponent<FixedJoint2D>();
+            //FixedJoint2D fixedJoint = GetComponent<FixedJoint2D>();
+            //fixedJoint.connectedBody = LastBall.GetComponent<Rigidbody2D>();
+
+            Excellent.transform.position = gameObject.transform.position - new Vector3(0.0f, 0.0538f, 0.0f);
+
+            DontIceCream = false;
         }
     }
 }
