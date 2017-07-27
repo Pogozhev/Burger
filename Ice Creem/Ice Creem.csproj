@@ -18,7 +18,7 @@
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion>4</LangVersion>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BallFall.cs" />
-    <Compile Include="Assets\Scripts\Check.cs" />
+    <Compile Include="Assets\Scripts\CameraMove.cs" />
     <Compile Include="Assets\Scripts\CraneMove.cs" />
     <Compile Include="Assets\Scripts\CraneMove2.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />

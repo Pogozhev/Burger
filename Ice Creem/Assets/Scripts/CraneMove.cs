@@ -6,6 +6,8 @@ public class CraneMove : MonoBehaviour
 {
     public float speed;
 
+    private bool qwer = false;
+    private float time;
     private Rigidbody2D rb;
     private bool GoRight = true;
     private bool GoLeft = false;
@@ -17,7 +19,7 @@ public class CraneMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 Vel = new Vector2(1.0f, 0.0f);
+        Vector2 Vel = new Vector2(1.0f, rb.velocity.y);
 
         if (GoRight)
         {
@@ -29,6 +31,12 @@ public class CraneMove : MonoBehaviour
         {
             rb.velocity = Vel * -speed;
         }
+
+        if (qwer)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 1.0f);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,4 +54,19 @@ public class CraneMove : MonoBehaviour
             GoLeft = true;
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            qwer = true;
+            time = Time.time;
+        }
+
+        if (Time.time - time >= 1.0f)
+        {
+            qwer = false;
+            rb.velocity = new Vector2(rb.velocity.x, 0.0f);
+        }
+    } 
 }
